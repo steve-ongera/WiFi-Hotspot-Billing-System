@@ -1,10 +1,10 @@
-# 📡 WifiBill — WiFi Hotspot Billing System
+#  WifiBill — WiFi Hotspot Billing System
 
 > Production-ready WiFi billing platform built with Django 5, React 19, MikroTik RouterOS, and M-Pesa Daraja API.
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Overview](#overview)
 - [Architecture](#architecture)
@@ -156,8 +156,8 @@ Customer gets internet access
 ```
 wifibill/
 │
-├── 📁 backend/                          # Django project root
-│   ├── 📁 config/                       # Django project settings
+├──  backend/                          # Django project root
+│   ├──  config/                       # Django project settings
 │   │   ├── __init__.py
 │   │   ├── settings/
 │   │   │   ├── __init__.py
@@ -168,8 +168,8 @@ wifibill/
 │   │   ├── wsgi.py
 │   │   └── asgi.py
 │   │
-│   ├── 📁 apps/ ( for appp just one core application to minimize several apps just one is enough for login we will be using email and password or phonenumber either)
-│   │   ├── 📁 accounts/                 # User management
+│   ├──  apps/ ( for appp just one core application to minimize several apps just one is enough for login we will be using email and password or phonenumber either)
+│   │   ├──  accounts/                 # User management
 │   │   │   ├── __init__.py
 │   │   │   ├── apps.py
 │   │   │   ├── models.py                # Customer model
@@ -179,7 +179,7 @@ wifibill/
 │   │   │   ├── permissions.py
 │   │   │   └── admin.py
 │   │   │
-│   │   ├── 📁 packages/                 # Internet packages
+│   │   ├──  packages/                 # Internet packages
 │   │   │   ├── __init__.py
 │   │   │   ├── apps.py
 │   │   │   ├── models.py                # Package, Voucher models
@@ -188,7 +188,7 @@ wifibill/
 │   │   │   ├── urls.py
 │   │   │   └── admin.py
 │   │   │
-│   │   ├── 📁 payments/                 # M-Pesa payments
+│   │   ├──  payments/                 # M-Pesa payments
 │   │   │   ├── __init__.py
 │   │   │   ├── apps.py
 │   │   │   ├── models.py                # Payment, TransactionLog
@@ -197,7 +197,7 @@ wifibill/
 │   │   │   ├── urls.py
 │   │   │   └── admin.py
 │   │   │
-│   │   ├── 📁 hotspot/                  # MikroTik integration
+│   │   ├──  hotspot/                  # MikroTik integration
 │   │   │   ├── __init__.py
 │   │   │   ├── apps.py
 │   │   │   ├── models.py                # HotspotUser, Session, Bandwidth
@@ -206,46 +206,46 @@ wifibill/
 │   │   │   ├── urls.py
 │   │   │   └── admin.py
 │   │   │
-│   │   └── 📁 reports/                  # Analytics & reports
+│   │   └──  reports/                  # Analytics & reports
 │   │       ├── __init__.py
 │   │       ├── apps.py
 │   │       ├── views.py
 │   │       └── urls.py
 │   │
-│   ├── 📁 services/                     # External service integrations
+│   ├──  services/                     # External service integrations
 │   │   ├── __init__.py
 │   │   ├── mikrotik.py                  # MikroTik RouterOS API service
 │   │   └── mpesa.py                     # Safaricom Daraja service
 │   │
-│   ├── 📁 tasks/                        # Celery tasks
+│   ├──  tasks/                        # Celery tasks
 │   │   ├── __init__.py
 │   │   ├── celery.py                    # Celery app config
 │   │   ├── hotspot_tasks.py             # Activate/expire users
 │   │   └── payment_tasks.py            # Payment verification
 │   │
-│   ├── 📁 utils/                        # Helpers & utilities
+│   ├──  utils/                        # Helpers & utilities
 │   │   ├── __init__.py
 │   │   ├── responses.py                 # Standardized API responses
 │   │   ├── pagination.py                # Custom pagination
 │   │   └── validators.py               # Phone number validators
 │   │
-│   ├── 📁 templates/                    # Django HTML templates
+│   ├──  templates/                    # Django HTML templates
 │   │   └── receipts/
 │   │       └── receipt.html             # PDF receipt template
 │   │
-│   ├── 📁 static/                       # Static files
-│   ├── 📁 media/                        # Uploaded files
+│   ├──  static/                       # Static files
+│   ├──  media/                        # Uploaded files
 │   ├── manage.py
 │   ├── requirements.txt
 │   ├── requirements-dev.txt
 │   └── .env.example
 │
-├── 📁 frontend/                         # React + Vite project
-│   ├── 📁 src/
-│   │   ├── 📁 assets/                   # Images, icons, fonts
+├──  frontend/                         # React + Vite project
+│   ├──  src/
+│   │   ├──  assets/                   # Images, icons, fonts
 │   │   │
-│   │   ├── 📁 components/               # Reusable UI components
-│   │   │   ├── 📁 common/
+│   │   ├──  components/               # Reusable UI components
+│   │   │   ├──  common/
 │   │   │   │   ├── Navbar.jsx
 │   │   │   │   ├── Sidebar.jsx
 │   │   │   │   ├── Footer.jsx
@@ -254,39 +254,39 @@ wifibill/
 │   │   │   │   ├── AlertMessage.jsx
 │   │   │   │   └── Pagination.jsx
 │   │   │   │
-│   │   │   ├── 📁 dashboard/
+│   │   │   ├──  dashboard/
 │   │   │   │   ├── StatCard.jsx
 │   │   │   │   ├── RevenueChart.jsx
 │   │   │   │   ├── UsersChart.jsx
 │   │   │   │   └── RecentPayments.jsx
 │   │   │   │
-│   │   │   ├── 📁 packages/
+│   │   │   ├──  packages/
 │   │   │   │   ├── PackageCard.jsx
 │   │   │   │   └── PackageForm.jsx
 │   │   │   │
-│   │   │   ├── 📁 payments/
+│   │   │   ├──  payments/
 │   │   │   │   ├── MpesaModal.jsx
 │   │   │   │   ├── PaymentStatusPoller.jsx
 │   │   │   │   └── ReceiptDownload.jsx
 │   │   │   │
-│   │   │   └── 📁 hotspot/
+│   │   │   └──  hotspot/
 │   │   │       ├── SessionTimer.jsx
 │   │   │       ├── DataUsageBar.jsx
 │   │   │       └── OnlineUsersList.jsx
 │   │   │
-│   │   ├── 📁 pages/
-│   │   │   ├── 📁 auth/
+│   │   ├──  pages/
+│   │   │   ├──  auth/
 │   │   │   │   ├── Login.jsx
 │   │   │   │   └── Register.jsx
 │   │   │   │
-│   │   │   ├── 📁 customer/
+│   │   │   ├──  customer/
 │   │   │   │   ├── CustomerDashboard.jsx
 │   │   │   │   ├── Packages.jsx
 │   │   │   │   ├── PurchasePackage.jsx
 │   │   │   │   ├── PaymentHistory.jsx
 │   │   │   │   └── Profile.jsx
 │   │   │   │
-│   │   │   └── 📁 admin/
+│   │   │   └──  admin/
 │   │   │       ├── AdminDashboard.jsx
 │   │   │       ├── ManageUsers.jsx
 │   │   │       ├── ManagePackages.jsx
@@ -296,23 +296,23 @@ wifibill/
 │   │   │       ├── RevenueReports.jsx
 │   │   │       └── Settings.jsx
 │   │   │
-│   │   ├── 📁 contexts/
+│   │   ├──  contexts/
 │   │   │   └── AuthContext.jsx          # JWT auth context + provider
 │   │   │
-│   │   ├── 📁 hooks/
+│   │   ├──  hooks/
 │   │   │   ├── useAuth.js
 │   │   │   ├── usePackages.js
 │   │   │   ├── usePayments.js
 │   │   │   └── useHotspot.js
 │   │   │
-│   │   ├── 📁 layouts/
+│   │   ├──  layouts/
 │   │   │   ├── CustomerLayout.jsx       # Navbar + footer for customers
 │   │   │   └── AdminLayout.jsx          # Sidebar layout for admin
 │   │   │
-│   │   ├── 📁 services/
+│   │   ├──  services/
 │   │   │   └── api.js                   # Axios instance + all API calls
 │   │   │
-│   │   ├── 📁 utils/
+│   │   ├──  utils/
 │   │   │   ├── formatters.js            # Currency, date, data formatters
 │   │   │   └── validators.js           # Form validators
 │   │   │
@@ -325,7 +325,7 @@ wifibill/
 │   ├── package.json
 │   └── .env.example
 │
-├── 📁 docker/
+├──  docker/
 │   ├── backend.Dockerfile
 │   ├── frontend.Dockerfile
 │   ├── nginx/
@@ -333,12 +333,12 @@ wifibill/
 │   │   └── wifibill.conf               # Site config
 │   └── celery.Dockerfile
 │
-├── 📁 scripts/
+├──  scripts/
 │   ├── setup.sh                         # Initial server setup
 │   ├── deploy.sh                        # Deployment script
 │   └── backup_db.sh                    # DB backup cron script
 │
-├── 📁 mikrotik/
+├──  mikrotik/
 │   ├── setup_hotspot.rsc               # MikroTik terminal commands
 │   ├── captive_portal/
 │   │   ├── login.html                   # Custom hotspot login page
@@ -1368,4 +1368,4 @@ WeasyPrint==62.3
 
 ---
 
-*Built by Gadafi — WifiBill v1.0*
+*Built by Steve Ongera  / 0757790687 — WifiBill v1.0*
