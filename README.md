@@ -209,7 +209,8 @@ wifibill/
 │
 ├── frontend/                           # React + Vite project
 │   ├── src/
-│   │   ├── assets/                     # Images, icons, fonts
+│   │   ├── assets/  
+|   |   |__styles/main.css                   # Images, icons, fonts
 │   │   │
 │   │   ├── components/                 # Reusable UI components
 │   │   │   ├── common/
