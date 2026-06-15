@@ -152,100 +152,67 @@ Customer gets internet access
 ---
 
 ## Project Structure
-
+ 
 ```
 wifibill/
 │
-├──  backend/                          # Django project root
-│   ├──  config/                       # Django project settings
+├── backend/                            # Django project root
+│   ├── config/                         # Django project settings
 │   │   ├── __init__.py
 │   │   ├── settings/
 │   │   │   ├── __init__.py
-│   │   │   ├── base.py                  # Shared settings
-│   │   │   ├── development.py           # Dev overrides
-│   │   │   └── production.py           # Prod overrides
-│   │   ├── urls.py                      # Root URL conf
+│   │   │   ├── base.py                 # Shared settings
+│   │   │   ├── development.py          # Dev overrides
+│   │   │   └── production.py          # Prod overrides
+│   │   ├── urls.py                     # Root URL conf
 │   │   ├── wsgi.py
 │   │   └── asgi.py
 │   │
-│   ├──  apps/ ( for appp just one core application to minimize several apps just one is enough for login we will be using email and password or phonenumber either)
-│   │   ├──  accounts/                 # User management
-│   │   │   ├── __init__.py
-│   │   │   ├── apps.py
-│   │   │   ├── models.py                # Customer model
-│   │   │   ├── serializers.py
-│   │   │   ├── views.py                 # Auth endpoints
-│   │   │   ├── urls.py
-│   │   │   ├── permissions.py
-│   │   │   └── admin.py
-│   │   │
-│   │   ├──  packages/                 # Internet packages
-│   │   │   ├── __init__.py
-│   │   │   ├── apps.py
-│   │   │   ├── models.py                # Package, Voucher models
-│   │   │   ├── serializers.py
-│   │   │   ├── views.py
-│   │   │   ├── urls.py
-│   │   │   └── admin.py
-│   │   │
-│   │   ├──  payments/                 # M-Pesa payments
-│   │   │   ├── __init__.py
-│   │   │   ├── apps.py
-│   │   │   ├── models.py                # Payment, TransactionLog
-│   │   │   ├── serializers.py
-│   │   │   ├── views.py                 # STK push + callback
-│   │   │   ├── urls.py
-│   │   │   └── admin.py
-│   │   │
-│   │   ├──  hotspot/                  # MikroTik integration
-│   │   │   ├── __init__.py
-│   │   │   ├── apps.py
-│   │   │   ├── models.py                # HotspotUser, Session, Bandwidth
-│   │   │   ├── serializers.py
-│   │   │   ├── views.py
-│   │   │   ├── urls.py
-│   │   │   └── admin.py
-│   │   │
-│   │   └──  reports/                  # Analytics & reports
+│   ├── apps/
+│   │   └── core/                       # Single app — all business logic
 │   │       ├── __init__.py
 │   │       ├── apps.py
-│   │       ├── views.py
-│   │       └── urls.py
+│   │       ├── models.py               # Customer, Package, Payment, Voucher, Session models
+│   │       ├── serializers.py
+│   │       ├── views.py                # Auth, packages, payments, hotspot endpoints
+│   │       ├── urls.py
+│   │       ├── permissions.py
+│   │       └── admin.py
 │   │
-│   ├──  services/                     # External service integrations
+│   ├── services/                       # External service integrations
 │   │   ├── __init__.py
-│   │   ├── mikrotik.py                  # MikroTik RouterOS API service
-│   │   └── mpesa.py                     # Safaricom Daraja service
+│   │   ├── mikrotik.py                 # MikroTik RouterOS API service
+│   │   └── mpesa.py                    # Safaricom Daraja service
 │   │
-│   ├──  tasks/                        # Celery tasks
+│   ├── tasks/                          # Celery async tasks
 │   │   ├── __init__.py
-│   │   ├── celery.py                    # Celery app config
-│   │   ├── hotspot_tasks.py             # Activate/expire users
-│   │   └── payment_tasks.py            # Payment verification
+│   │   ├── celery.py                   # Celery app config
+│   │   ├── hotspot_tasks.py            # Activate/expire hotspot users
+│   │   └── payment_tasks.py           # Payment verification polling
 │   │
-│   ├──  utils/                        # Helpers & utilities
+│   ├── utils/                          # Helpers & utilities
 │   │   ├── __init__.py
-│   │   ├── responses.py                 # Standardized API responses
-│   │   ├── pagination.py                # Custom pagination
-│   │   └── validators.py               # Phone number validators
+│   │   ├── responses.py                # Standardized API responses
+│   │   ├── pagination.py               # Custom pagination
+│   │   └── validators.py              # Phone number validators
 │   │
-│   ├──  templates/                    # Django HTML templates
+│   ├── templates/
 │   │   └── receipts/
-│   │       └── receipt.html             # PDF receipt template
+│   │       └── receipt.html            # PDF receipt template
 │   │
-│   ├──  static/                       # Static files
-│   ├──  media/                        # Uploaded files
+│   ├── static/
+│   ├── media/
 │   ├── manage.py
 │   ├── requirements.txt
 │   ├── requirements-dev.txt
 │   └── .env.example
 │
-├──  frontend/                         # React + Vite project
-│   ├──  src/
-│   │   ├──  assets/                   # Images, icons, fonts
+├── frontend/                           # React + Vite project
+│   ├── src/
+│   │   ├── assets/                     # Images, icons, fonts
 │   │   │
-│   │   ├──  components/               # Reusable UI components
-│   │   │   ├──  common/
+│   │   ├── components/                 # Reusable UI components
+│   │   │   ├── common/
 │   │   │   │   ├── Navbar.jsx
 │   │   │   │   ├── Sidebar.jsx
 │   │   │   │   ├── Footer.jsx
@@ -254,39 +221,39 @@ wifibill/
 │   │   │   │   ├── AlertMessage.jsx
 │   │   │   │   └── Pagination.jsx
 │   │   │   │
-│   │   │   ├──  dashboard/
+│   │   │   ├── dashboard/
 │   │   │   │   ├── StatCard.jsx
 │   │   │   │   ├── RevenueChart.jsx
 │   │   │   │   ├── UsersChart.jsx
 │   │   │   │   └── RecentPayments.jsx
 │   │   │   │
-│   │   │   ├──  packages/
+│   │   │   ├── packages/
 │   │   │   │   ├── PackageCard.jsx
 │   │   │   │   └── PackageForm.jsx
 │   │   │   │
-│   │   │   ├──  payments/
+│   │   │   ├── payments/
 │   │   │   │   ├── MpesaModal.jsx
 │   │   │   │   ├── PaymentStatusPoller.jsx
 │   │   │   │   └── ReceiptDownload.jsx
 │   │   │   │
-│   │   │   └──  hotspot/
+│   │   │   └── hotspot/
 │   │   │       ├── SessionTimer.jsx
 │   │   │       ├── DataUsageBar.jsx
 │   │   │       └── OnlineUsersList.jsx
 │   │   │
-│   │   ├──  pages/
-│   │   │   ├──  auth/
+│   │   ├── pages/
+│   │   │   ├── auth/
 │   │   │   │   ├── Login.jsx
 │   │   │   │   └── Register.jsx
 │   │   │   │
-│   │   │   ├──  customer/
+│   │   │   ├── customer/
 │   │   │   │   ├── CustomerDashboard.jsx
 │   │   │   │   ├── Packages.jsx
 │   │   │   │   ├── PurchasePackage.jsx
 │   │   │   │   ├── PaymentHistory.jsx
 │   │   │   │   └── Profile.jsx
 │   │   │   │
-│   │   │   └──  admin/
+│   │   │   └── admin/
 │   │   │       ├── AdminDashboard.jsx
 │   │   │       ├── ManageUsers.jsx
 │   │   │       ├── ManagePackages.jsx
@@ -296,27 +263,27 @@ wifibill/
 │   │   │       ├── RevenueReports.jsx
 │   │   │       └── Settings.jsx
 │   │   │
-│   │   ├──  contexts/
-│   │   │   └── AuthContext.jsx          # JWT auth context + provider
+│   │   ├── contexts/
+│   │   │   └── AuthContext.jsx         # JWT auth context + provider
 │   │   │
-│   │   ├──  hooks/
+│   │   ├── hooks/
 │   │   │   ├── useAuth.js
 │   │   │   ├── usePackages.js
 │   │   │   ├── usePayments.js
 │   │   │   └── useHotspot.js
 │   │   │
-│   │   ├──  layouts/
-│   │   │   ├── CustomerLayout.jsx       # Navbar + footer for customers
-│   │   │   └── AdminLayout.jsx          # Sidebar layout for admin
+│   │   ├── layouts/
+│   │   │   ├── CustomerLayout.jsx      # Navbar + footer for customers
+│   │   │   └── AdminLayout.jsx         # Sidebar layout for admin
 │   │   │
-│   │   ├──  services/
-│   │   │   └── api.js                   # Axios instance + all API calls
+│   │   ├── services/
+│   │   │   └── api.js                  # Axios instance + all API calls
 │   │   │
-│   │   ├──  utils/
-│   │   │   ├── formatters.js            # Currency, date, data formatters
-│   │   │   └── validators.js           # Form validators
+│   │   ├── utils/
+│   │   │   ├── formatters.js           # Currency, date, data formatters
+│   │   │   └── validators.js          # Form validators
 │   │   │
-│   │   ├── App.jsx                      # Root component + routes
+│   │   ├── App.jsx                     # Root component + routes
 │   │   ├── main.jsx
 │   │   └── index.css
 │   │
@@ -325,34 +292,33 @@ wifibill/
 │   ├── package.json
 │   └── .env.example
 │
-├──  docker/
+├── docker/
 │   ├── backend.Dockerfile
 │   ├── frontend.Dockerfile
-│   ├── nginx/
-│   │   ├── nginx.conf                   # Main Nginx config
-│   │   └── wifibill.conf               # Site config
-│   └── celery.Dockerfile
+│   ├── celery.Dockerfile
+│   └── nginx/
+│       ├── nginx.conf
+│       └── wifibill.conf
 │
-├──  scripts/
-│   ├── setup.sh                         # Initial server setup
-│   ├── deploy.sh                        # Deployment script
-│   └── backup_db.sh                    # DB backup cron script
+├── scripts/
+│   ├── setup.sh                        # Initial server setup
+│   ├── deploy.sh                       # Deployment script
+│   └── backup_db.sh                   # DB backup cron script
 │
-├──  mikrotik/
-│   ├── setup_hotspot.rsc               # MikroTik terminal commands
+├── mikrotik/
+│   ├── setup_hotspot.rsc              # MikroTik terminal commands
 │   ├── captive_portal/
-│   │   ├── login.html                   # Custom hotspot login page
+│   │   ├── login.html                  # Custom hotspot login page
 │   │   ├── logout.html
-│   │   └── alogin.html                  # Auto-login redirect
-│   └── README.md                        # Step-by-step MikroTik setup
+│   │   └── alogin.html                 # Auto-login redirect
+│   └── README.md                       # Step-by-step MikroTik setup
 │
-├── docker-compose.yml                   # Full stack compose
-├── docker-compose.dev.yml              # Development compose
+├── docker-compose.yml                  # Full stack compose
+├── docker-compose.dev.yml             # Development compose
 ├── .env.example
 ├── .gitignore
 └── README.md
 ```
-
 ---
 
 ## Database Design
